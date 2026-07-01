@@ -1,0 +1,379 @@
+INFO:     Started server process [39020]
+INFO:     Waiting for application startup.
+2026-06-30 16:46:20,999 INFO drone: DrOne API started
+INFO:     Application startup complete.
+ERROR:    [Errno 10048] error while attempting to bind on address ('0.0.0INFO:     127.0.0.1:56993 - "GET /health HTTP/1.1" 200 OK
+2026-06-30 16:47:21,767 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/auth/v1/.well-known/jwks.json "HTTP/1.1 200 OK"
+2026-06-30 16:47:21,771 INFO drone: JWKS refreshed (1 keys)
+2026-06-30 16:47:22,837 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:23,016 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.3ce1b37a-4a76-4dde-8d46-2677ddc7c66f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:23,192 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+INFO:     127.0.0.1:56733 - "GET /appointments/3ce1b37a-4a76-4dde-8d46-2677ddc7c66f HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56733 - "OPTIONS /appointments/ HTTP/1.1" 200 OK
+2026-06-30 16:47:26,637 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:26,807 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:26,973 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&order=date.desc&patient_id=eq.1b3ae195-07c6-44a0-863f-0ab919a8e458 "HTTP/2 200 OK"
+INFO:     127.0.0.1:56733 - "GET /appointments/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56733 - "OPTIONS /appointments/3ce1b37a-4a76-4dde-8d46-2677ddc7c66f/cancel HTTP/1.1" 200 OK
+2026-06-30 16:47:30,809 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:30,981 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:31,144 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=patient_id%2C%20status&id=eq.3ce1b37a-4a76-4dde-8d46-2677ddc7c66f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:31,324 INFO httpx: HTTP Request: PATCH https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?id=eq.3ce1b37a-4a76-4dde-8d46-2677ddc7c66f "HTTP/2 200 OK"
+2026-06-30 16:47:31,332 INFO drone: Appointment cancelled: 3ce1b37a-4a76-4dde-8d46-2677ddc7c66f by 74228300-58f4-4c6e-9020-e39468388c3f
+INFO:     127.0.0.1:56733 - "PATCH /appointments/3ce1b37a-4a76-4dde-8d46-2677ddc7c66f/cancel HTTP/1.1" 200 OK
+2026-06-30 16:47:31,514 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:31,684 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:31,857 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&order=date.desc&patient_id=eq.1b3ae195-07c6-44a0-863f-0ab919a8e458 "HTTP/2 200 OK"
+INFO:     127.0.0.1:56733 - "GET /appointments/ HTTP/1.1" 200 OK
+2026-06-30 16:47:40,827 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:41,005 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/doctor_leaves?select=%2A&date=eq.2026-07-10&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:41,166 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=time_slot&date=eq.2026-07-10&status=neq.cancelled "HTTP/2 200 OK"
+INFO:     127.0.0.1:58390 - "GET /appointments/slots?date=2026-07-10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50884 - "OPTIONS /appointments/book HTTP/1.1" 200 OK
+2026-06-30 16:47:52,943 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:53,103 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/doctor_leaves?select=%2A&date=eq.2026-07-10&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:53,253 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:53,412 INFO httpx: HTTP Request: POST https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments "HTTP/2 201 Created"
+2026-06-30 16:47:53,576 INFO httpx: HTTP Request: POST https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/payments "HTTP/2 201 Created"
+2026-06-30 16:47:53,738 INFO httpx: HTTP Request: POST https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/op_records "HTTP/2 201 Created"
+2026-06-30 16:47:53,742 INFO drone: Appointment booked: b3656007-4e25-4eb4-aa92-b71cf68616b6 by patient 1b3ae195-07c6-44a0-863f-0ab919a8e458
+INFO:     127.0.0.1:50884 - "POST /appointments/book HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62433 - "OPTIONS /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6 HTTP/1.1" 200 OK
+2026-06-30 16:47:53,899 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:53,954 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:54,053 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/doctor_leaves?select=%2A&date=eq.2026-07-10&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:54,207 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.b3656007-4e25-4eb4-aa92-b71cf68616b6&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:47:54,220 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=time_slot&date=eq.2026-07-10&status=neq.cancelled "HTTP/2 200 OK"
+2026-06-30 16:47:54,368 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+INFO:     127.0.0.1:50884 - "GET /appointments/slots?date=2026-07-10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62433 - "GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6 HTTP/1.1" 200 OK
+2026-06-30 16:50:52,591 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:50:52,771 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/doctor_leaves?select=%2A&date=eq.2026-07-10&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:50:52,935 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:50:53,108 INFO httpx: HTTP Request: POST https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments "HTTP/2 201 Created"
+2026-06-30 16:50:53,286 INFO httpx: HTTP Request: POST https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/payments "HTTP/2 201 Created"
+2026-06-30 16:50:53,456 INFO httpx: HTTP Request: POST https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/op_records "HTTP/2 201 Created"
+2026-06-30 16:50:53,460 INFO drone: Appointment booked: 580c5a99-0be4-4bc2-b84e-91e5ec9202da by patient 1b3ae195-07c6-44a0-863f-0ab919a8e458
+INFO:     127.0.0.1:61328 - "POST /appointments/book HTTP/1.1" 200 OK
+2026-06-30 16:50:56,596 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:50:56,770 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.580c5a99-0be4-4bc2-b84e-91e5ec9202da&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:50:56,937 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+INFO:     127.0.0.1:60852 - "GET /appointments/580c5a99-0be4-4bc2-b84e-91e5ec9202da HTTP/1.1" 200 OK
+2026-06-30 16:50:59,994 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:51:00,161 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:51:00,327 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=patient_id%2C%20status&id=eq.580c5a99-0be4-4bc2-b84e-91e5ec9202da&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:51:00,493 INFO httpx: HTTP Request: PATCH https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?id=eq.580c5a99-0be4-4bc2-b84e-91e5ec9202da "HTTP/2 200 OK"
+2026-06-30 16:51:00,500 INFO drone: Appointment cancelled: 580c5a99-0be4-4bc2-b84e-91e5ec9202da by 74228300-58f4-4c6e-9020-e39468388c3f
+INFO:     127.0.0.1:49869 - "PATCH /appointments/580c5a99-0be4-4bc2-b84e-91e5ec9202da/cancel HTTP/1.1" 200 OK
+2026-06-30 16:51:45,843 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:51:46,021 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.b3656007-4e25-4eb4-aa92-b71cf68616b6&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:51:46,184 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+INFO:     127.0.0.1:50271 - "GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59468 - "OPTIONS /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6/op-slip.pdf HTTP/1.1" 200 OK
+2026-06-30 16:55:01,371 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:01,568 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.b3656007-4e25-4eb4-aa92-b71cf68616b6&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:01,730 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:01,737 ERROR drone: Unhandled error on GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6/op-slip.pdf: 0
+Traceback (most recent call last):
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_asyncio.py", line 976, in run
+    result = context.run(func, *args)
+  File "C:\Users\Vinayak Ramavath\OneDrive\Desktop\Doctorify\Backend\app\routers\appointments.py", line 248, in download_op_slip
+    _opr = appt.get("op_records") or {}
+                     ^^^^^
+KeyError: 0
+INFO:     127.0.0.1:59468 - "GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6/op-slip.pdf HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\uvicorn\protocols\http\httptools_impl.py", line 401, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\uvicorn\middleware\proxy_headers.py", line 70, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_asyncio.py", line 976, in run
+    result = context.run(func, *args)
+  File "C:\Users\Vinayak Ramavath\OneDrive\Desktop\Doctorify\Backend\app\routers\appointments.py", line 248, in download_op_slip
+    _opr = appt.get("op_records") or {}
+                     ^^^^^
+KeyError: 0
+2026-06-30 16:55:09,549 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:09,751 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:09,967 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&order=date.desc&patient_id=eq.1b3ae195-07c6-44a0-863f-0ab919a8e458 "HTTP/2 200 OK"
+INFO:     127.0.0.1:56133 - "GET /appointments/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56133 - "OPTIONS /appointments/580c5a99-0be4-4bc2-b84e-91e5ec9202da HTTP/1.1" 200 OK
+2026-06-30 16:55:14,444 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:14,614 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.580c5a99-0be4-4bc2-b84e-91e5ec9202da&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:14,773 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+INFO:     127.0.0.1:56133 - "GET /appointments/580c5a99-0be4-4bc2-b84e-91e5ec9202da HTTP/1.1" 200 OK
+2026-06-30 16:55:20,749 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:20,916 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.580c5a99-0be4-4bc2-b84e-91e5ec9202da&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:21,085 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+INFO:     127.0.0.1:59663 - "GET /appointments/580c5a99-0be4-4bc2-b84e-91e5ec9202da HTTP/1.1" 200 OK
+2026-06-30 16:55:21,519 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:21,684 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:21,854 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&order=date.desc&patient_id=eq.1b3ae195-07c6-44a0-863f-0ab919a8e458 "HTTP/2 200 OK"
+INFO:     127.0.0.1:59663 - "GET /appointments/ HTTP/1.1" 200 OK
+2026-06-30 16:55:47,053 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:47,209 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.b3656007-4e25-4eb4-aa92-b71cf68616b6&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:47,371 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+INFO:     127.0.0.1:64761 - "GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6 HTTP/1.1" 200 OK
+2026-06-30 16:55:50,539 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:50,701 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.b3656007-4e25-4eb4-aa92-b71cf68616b6&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:50,861 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 16:55:50,869 ERROR drone: Unhandled error on GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6/op-slip.pdf: 0
+Traceback (most recent call last):
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_asyncio.py", line 976, in run
+    result = context.run(func, *args)
+  File "C:\Users\Vinayak Ramavath\OneDrive\Desktop\Doctorify\Backend\app\routers\appointments.py", line 248, in download_op_slip
+    _opr = appt.get("op_records") or {}
+                     ^^^^^
+KeyError: 0
+INFO:     127.0.0.1:64761 - "GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6/op-slip.pdf HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\uvicorn\protocols\http\httptools_impl.py", line 401, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        self.scope, self.receive, self.send
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\uvicorn\middleware\proxy_headers.py", line 70, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 62, in wrapped_app
+    raise exc
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\_exception_handler.py", line 51, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\Vinayak Ramavath\AppData\Roaming\Python\Python313\site-packages\anyio\_backends\_asyncio.py", line 976, in run
+    result = context.run(func, *args)
+  File "C:\Users\Vinayak Ramavath\OneDrive\Desktop\Doctorify\Backend\app\routers\appointments.py", line 248, in download_op_slip
+    _opr = appt.get("op_records") or {}
+                     ^^^^^
+KeyError: 0
+INFO:     127.0.0.1:57590 - "OPTIONS /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6 HTTP/1.1" 200 OK
+2026-06-30 17:05:58,464 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 17:05:58,652 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.b3656007-4e25-4eb4-aa92-b71cf68616b6&limit=1 "HTTP/2 200 OK"
+2026-06-30 17:05:58,859 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+INFO:     127.0.0.1:57590 - "GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58851 - "GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6/op-slip.pdf HTTP/1.1" 403 Forbidden
+2026-06-30 17:07:24,127 WARNING drone: JWT validation failed: Error decoding token headers.
+INFO:     127.0.0.1:61607 - "GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6/op-slip.pdf HTTP/1.1" 401 Unauthorized
+2026-06-30 17:08:24,683 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 17:08:24,864 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.b3656007-4e25-4eb4-aa92-b71cf68616b6&limit=1 "HTTP/2 200 OK"
+2026-06-30 17:08:25,031 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+INFO:     127.0.0.1:57329 - "GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6 HTTP/1.1" 200 OK
+2026-06-30 17:10:39,679 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/users?select=role&id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+2026-06-30 17:10:39,834 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/appointments?select=%2A%2C%20patients%28%2A%29%2C%20op_records%28%2A%29%2C%20payments%28%2A%29&id=eq.b3656007-4e25-4eb4-aa92-b71cf68616b6&limit=1 "HTTP/2 200 OK"
+2026-06-30 17:10:39,993 INFO httpx: HTTP Request: GET https://bxjrjfajqdaeurzlqpmn.supabase.co/rest/v1/patients?select=id&user_id=eq.74228300-58f4-4c6e-9020-e39468388c3f&limit=1 "HTTP/2 200 OK"
+INFO:     127.0.0.1:52744 - "GET /appointments/b3656007-4e25-4eb4-aa92-b71cf68616b6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53331 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52217 - "GET /health HTTP/1.1" 200 OK
