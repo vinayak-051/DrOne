@@ -1,5 +1,6 @@
-import { Component } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Component, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom'
+import { App as CapApp } from '@capacitor/app'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './context/AuthContext'
@@ -75,6 +76,19 @@ const ProtectedRoute = ({ children, role }) => {
 
 const AppRoutes = () => {
   const { user, profile, loading } = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const handler = CapApp.addListener('backButton', ({ canGoBack }) => {
+      if (canGoBack) {
+        navigate(-1)
+      } else {
+        CapApp.exitApp()
+      }
+    })
+    return () => { handler.then(h => h.remove()) }
+  }, [navigate])
+
   if (loading) return <PageLoader />
 
   return (

@@ -3,6 +3,8 @@ import {
   LayoutDashboard, Calendar, FileText, Users, Search,
   BarChart2, Clock, Activity, LogOut, Stethoscope, CalendarOff, FolderOpen,
 } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
+import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../hooks/useAuth'
 import toast from 'react-hot-toast'
 import logo from '../../assets/logo.png'
@@ -33,6 +35,15 @@ export const Sidebar = ({ mobile = false, onClose }) => {
   const { isAdmin, signOut, profile, patient } = useAuth()
   const navigate = useNavigate()
   const navItems = isAdmin ? adminNav : patientNav
+
+  const { data: doctorProfile } = useQuery({
+    queryKey: ['doctor-profile'],
+    queryFn: async () => {
+      const { data } = await supabase.from('doctor_profiles').select('*').limit(1).single()
+      return data
+    },
+    enabled: isAdmin,
+  })
 
   const handleSignOut = async () => {
     await signOut()
@@ -80,7 +91,7 @@ export const Sidebar = ({ mobile = false, onClose }) => {
               <Activity className="w-4 h-4 text-blue-600" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">Dr. Admin</p>
+              <p className="text-sm font-medium text-gray-900 truncate">{doctorProfile?.name || profile?.email || 'Doctor'}</p>
               <p className="text-xs text-gray-400">View Profile</p>
             </div>
           </button>

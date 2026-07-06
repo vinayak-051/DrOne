@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
-import { Save, Stethoscope, Phone, Mail, User, Pencil, X, Award, BadgeCheck, Clock } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Save, Stethoscope, Phone, Mail, User, Pencil, X, Award, BadgeCheck, Clock, Camera } from 'lucide-react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { supabase } from '../../lib/supabase'
+import logo from '../../assets/logo.png'
 import { Layout } from '../../components/common/Layout'
 import { Card, CardBody, CardHeader } from '../../components/common/Card'
 import { Input } from '../../components/common/Input'
@@ -22,19 +23,22 @@ const InfoRow = ({ icon: Icon, label, value }) => (
 
 export const AdminProfile = () => {
   const qc = useQueryClient()
+  const fileRef = useRef(null)
   const [editing, setEditing] = useState(false)
+  const [uploading, setUploading] = useState(false)
   const [form, setForm] = useState({ name: '', specialist: '', phone: '', email: '', experience: '', awards: '', certifications: '' })
 
   const { data: doctor, isLoading } = useQuery({
     queryKey: ['doctor-profile'],
     queryFn: async () => {
-      const { data } = await supabase.from('doctor_profiles').select('*').limit(1).single()
-      return data
+      const { data, error } = await supabase.from('doctor_profiles').select('*').limit(1)
+      if (error) throw error
+      return data?.[0] || null
     },
   })
 
   useEffect(() => {
-    if (doctor) setForm({
+    if (doctor && !editing) setForm({
       name: doctor.name || '',
       specialist: doctor.specialist || '',
       phone: doctor.phone || '',
@@ -47,23 +51,71 @@ export const AdminProfile = () => {
 
   const saveMutation = useMutation({
     mutationFn: async (values) => {
-      if (doctor?.id) {
-        const { error } = await supabase.from('doctor_profiles').update(values).eq('id', doctor.id)
+      const { data: rows } = await supabase.from('doctor_profiles').select('id').limit(1)
+      const existingId = doctor?.id || rows?.[0]?.id
+      if (existingId) {
+        const { data, error } = await supabase.from('doctor_profiles').update(values).eq('id', existingId).select().single()
         if (error) throw error
+        return data
       } else {
-        const { error } = await supabase.from('doctor_profiles').insert(values)
+        const { data, error } = await supabase.from('doctor_profiles').insert(values).select().single()
         if (error) throw error
+        return data
       }
     },
-    onSuccess: () => {
+    onSuccess: (saved) => {
       toast.success('Profile saved')
-      qc.invalidateQueries({ queryKey: ['doctor-profile'] })
+      qc.setQueryData(['doctor-profile'], (old) => ({ ...old, ...saved }))
       setEditing(false)
     },
-    onError: () => toast.error('Failed to save profile'),
+    onError: (err) => toast.error(err?.message || 'Failed to save profile'),
   })
 
+  const handlePhotoChange = async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    if (file.size > 5 * 1024 * 1024) return toast.error('Photo must be under 5MB')
+
+    setUploading(true)
+    try {
+      const ext = file.name.split('.').pop()
+      const path = `doctor-photo-${Date.now()}.${ext}`
+      const { error: upErr } = await supabase.storage
+        .from('doctor-photos')
+        .upload(path, file, { contentType: file.type })
+      if (upErr) throw upErr
+
+      const { data: { publicUrl } } = supabase.storage.from('doctor-photos').getPublicUrl(path)
+
+      const id = doctor?.id
+      if (id) {
+        const { error } = await supabase.from('doctor_profiles').update({ photo_url: publicUrl }).eq('id', id)
+        if (error) throw error
+      }
+      await qc.invalidateQueries({ queryKey: ['doctor-profile'] })
+      toast.success('Photo updated')
+    } catch (err) {
+      toast.error(err.message || 'Failed to upload photo')
+    } finally {
+      setUploading(false)
+      e.target.value = ''
+    }
+  }
+
   const set = (key) => (e) => setForm({ ...form, [key]: e.target.value })
+
+  const calcExperience = (dateStr) => {
+    if (!dateStr) return null
+    const start = new Date(dateStr)
+    if (isNaN(start)) return dateStr
+    const now = new Date()
+    let years = now.getFullYear() - start.getFullYear()
+    let months = now.getMonth() - start.getMonth()
+    if (months < 0) { years--; months += 12 }
+    if (years === 0) return `${months} month${months !== 1 ? 's' : ''}`
+    if (months === 0) return `${years} year${years !== 1 ? 's' : ''}`
+    return `${years} year${years !== 1 ? 's' : ''} ${months} month${months !== 1 ? 's' : ''}`
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -90,12 +142,38 @@ export const AdminProfile = () => {
         <Card className="overflow-hidden">
           <CardBody className="p-0">
             <div className="flex min-h-[260px]">
-              <div className="w-2/5 flex-shrink-0 bg-gray-100 flex items-center justify-center">
-                <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 font-bold text-3xl">{getInitials(doctor?.name)}</span>
+              <div className="w-2/5 flex-shrink-0 bg-gray-100 flex flex-col items-center justify-center gap-2">
+                <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handlePhotoChange} />
+                <div
+                  className={`relative ${editing ? 'cursor-pointer' : ''}`}
+                  onClick={() => editing && fileRef.current?.click()}
+                >
+                  {doctor?.photo_url ? (
+                    <img
+                      src={doctor.photo_url}
+                      alt="Doctor"
+                      className="w-24 h-24 rounded-full object-cover"
+                      onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex' }}
+                    />
+                  ) : null}
+                  <div
+                    className="w-24 h-24 bg-blue-100 rounded-full items-center justify-center"
+                    style={{ display: doctor?.photo_url ? 'none' : 'flex' }}
+                  >
+                    <span className="text-blue-600 font-bold text-3xl">{getInitials(doctor?.name)}</span>
+                  </div>
+                  {editing && (
+                    <div className="absolute inset-0 rounded-full bg-black/40 flex items-center justify-center">
+                      {uploading
+                        ? <LoadingSpinner size="sm" className="text-white" />
+                        : <Camera className="w-6 h-6 text-white" />}
+                    </div>
+                  )}
                 </div>
+                {editing && <p className="text-xs text-gray-500 font-medium">Tap to change photo</p>}
               </div>
-              <div className="flex-1 p-5 flex flex-col justify-center space-y-3">
+              <div className="flex-1 p-5 flex flex-col justify-center space-y-3 relative overflow-hidden">
+                <img src={logo} alt="" aria-hidden className="absolute right-2 bottom-2 w-20 h-20 object-contain opacity-20 pointer-events-none select-none" />
                 <div>
                   <p className="text-xl font-bold text-gray-900">{doctor?.name}</p>
                   {doctor?.specialist && (
@@ -105,7 +183,7 @@ export const AdminProfile = () => {
                     </div>
                   )}
                 </div>
-                {doctor?.experience && <InfoRow icon={Clock} label="Experience" value={doctor.experience} />}
+                {doctor?.experience && <InfoRow icon={Clock} label="Experience" value={calcExperience(doctor.experience)} />}
                 {doctor?.phone && <InfoRow icon={Phone} label="Contact" value={doctor.phone} />}
                 {doctor?.email && <InfoRow icon={Mail} label="Email" value={doctor.email} />}
               </div>
@@ -153,7 +231,19 @@ export const AdminProfile = () => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <Input label="Full Name" value={form.name} onChange={set('name')} required />
                 <Input label="Specialization" value={form.specialist} onChange={set('specialist')} />
-                <Input label="Experience" value={form.experience} onChange={set('experience')} placeholder="e.g. 15+ years" />
+                <div>
+                  <label className="text-sm font-medium text-gray-700 mb-1 block">Date of Commencement of Practice</label>
+                  <input
+                    type="date"
+                    value={form.experience}
+                    onChange={set('experience')}
+                    max={new Date().toISOString().split('T')[0]}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                  {form.experience && (
+                    <p className="text-xs text-blue-600 mt-1">Experience: {calcExperience(form.experience)}</p>
+                  )}
+                </div>
                 <Input label="Contact Number" value={form.phone} onChange={set('phone')} />
                 <Input label="Email" type="email" value={form.email} onChange={set('email')} />
                 <div>

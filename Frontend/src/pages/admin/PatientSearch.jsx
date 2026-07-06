@@ -58,7 +58,7 @@ const PatientDetail = ({ patient }) => {
 export const PatientSearch = () => {
   const [query, setQuery] = useState('')
   const [expanded, setExpanded] = useState(null)
-  const { data: results, isLoading } = useSearchPatients(query)
+  const { data: results, isLoading, isFetched } = useSearchPatients(query)
 
   return (
     <Layout>
@@ -80,10 +80,10 @@ export const PatientSearch = () => {
           <div className="space-y-3">
             {isLoading ? (
               <LoadingSpinner />
-            ) : results?.length === 0 ? (
+            ) : (isFetched && (!results || results.length === 0)) ? (
               <div className="text-center py-8 text-gray-400">
                 <Search className="w-10 h-10 mx-auto mb-2 opacity-30" />
-                <p>No patients found for &quot;{query}&quot;</p>
+                <p>No patients found for &ldquo;{query}&rdquo;</p>
               </div>
             ) : (
               results?.map((patient) => (

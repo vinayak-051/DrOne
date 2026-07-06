@@ -73,6 +73,26 @@ export const AuthProvider = ({ children }) => {
     return data
   }
 
+  const signInWithPhone = async ({ phone, password }) => {
+    const { data: pat, error: patErr } = await supabase
+      .from('patients')
+      .select('user_id')
+      .eq('phone', phone.trim())
+      .maybeSingle()
+    if (patErr || !pat) throw new Error('No account found with this phone number')
+
+    const { data: usr, error: usrErr } = await supabase
+      .from('users')
+      .select('email')
+      .eq('id', pat.user_id)
+      .single()
+    if (usrErr || !usr?.email) throw new Error('Account not found')
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email: usr.email, password })
+    if (error) throw error
+    return data
+  }
+
   const signOut = async () => {
     await supabase.auth.signOut()
     setUser(null)
@@ -84,7 +104,7 @@ export const AuthProvider = ({ children }) => {
   const isPatient = profile?.role === 'patient'
 
   return (
-    <AuthContext.Provider value={{ user, profile, patient, loading, authError, signUp, signIn, signOut, isAdmin, isPatient }}>
+    <AuthContext.Provider value={{ user, profile, patient, loading, authError, signUp, signIn, signInWithPhone, signOut, isAdmin, isPatient }}>
       {children}
     </AuthContext.Provider>
   )

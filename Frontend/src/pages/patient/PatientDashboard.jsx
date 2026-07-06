@@ -23,7 +23,7 @@ export const PatientDashboard = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">
-              Welcome back, {patient?.name?.split(' ')[0] || 'Patient'} 👋
+              {patient?.name?.split(' ')[0] || 'Patient'} 👋
             </h1>
             <p className="text-gray-500 text-sm mt-1">Manage your health appointments and records</p>
           </div>
