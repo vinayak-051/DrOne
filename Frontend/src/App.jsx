@@ -42,6 +42,7 @@ import { OPSlipPage } from './pages/patient/OPSlipPage'
 import { MedicalHistory } from './pages/patient/MedicalHistory'
 import { ProfilePage } from './pages/patient/ProfilePage'
 import { KnowYourDoctor } from './pages/patient/KnowYourDoctor'
+import { ReportsPage } from './pages/patient/ReportsPage'
 
 import { AdminDashboard } from './pages/admin/AdminDashboard'
 import { AppointmentManagement } from './pages/admin/AppointmentManagement'
@@ -87,6 +88,7 @@ const AppRoutes = () => {
       <Route path="/patient/op-slip/:appointmentId" element={<ProtectedRoute role="patient"><OPSlipPage /></ProtectedRoute>} />
       <Route path="/patient/history" element={<ProtectedRoute role="patient"><MedicalHistory /></ProtectedRoute>} />
       <Route path="/patient/doctor" element={<ProtectedRoute role="patient"><KnowYourDoctor /></ProtectedRoute>} />
+      <Route path="/patient/reports" element={<ProtectedRoute role="patient"><ReportsPage /></ProtectedRoute>} />
       <Route path="/patient/profile" element={<ProtectedRoute role="patient"><ProfilePage /></ProtectedRoute>} />
 
       <Route path="/admin/dashboard" element={<ProtectedRoute role="admin"><AdminDashboard /></ProtectedRoute>} />

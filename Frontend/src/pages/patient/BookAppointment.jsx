@@ -33,6 +33,7 @@ export const BookAppointment = () => {
 
   const handleBook = async () => {
     setPaying(true)
+    let appointmentId = null
     try {
       // 1. Create pending appointment
       const result = await bookMutation.mutateAsync({
@@ -41,7 +42,7 @@ export const BookAppointment = () => {
         payment_method: 'online',
         amount: CONSULTATION_FEE,
       })
-      const appointmentId = result.appointment.id
+      appointmentId = result.appointment.id
 
       // 2. Create Razorpay order
       const order = await api.post('/payments/create-order', {
@@ -74,12 +75,20 @@ export const BookAppointment = () => {
             setPaying(false)
           }
         },
-        onFailure: (msg) => {
+        onFailure: async (msg) => {
+          // Cancel the pending appointment so the slot is freed
+          if (appointmentId) {
+            await api.patch(`/appointments/${appointmentId}/cancel`).catch(() => {})
+          }
           toast.error(msg || 'Payment cancelled')
           setPaying(false)
         },
       })
     } catch (err) {
+      // Cancel appointment if order creation failed after appointment was created
+      if (appointmentId) {
+        await api.patch(`/appointments/${appointmentId}/cancel`).catch(() => {})
+      }
       toast.error(err?.message || 'Failed to initiate booking')
       setPaying(false)
     }

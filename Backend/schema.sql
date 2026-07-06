@@ -29,7 +29,7 @@ create table if not exists public.appointments (
   date date not null,
   time_slot text not null,
   status text not null default 'pending' check (status in ('pending', 'confirmed', 'cancelled', 'completed')),
-  payment_method text check (payment_method in ('online', 'pay_at_hospital')),
+  payment_method text check (payment_method in ('online')),
   created_at timestamptz default now(),
   unique(date, time_slot, status) -- prevent double booking (filtered by not-cancelled)
 );
@@ -78,7 +78,9 @@ create table if not exists public.payments (
   appointment_id uuid not null references public.appointments(id) on delete cascade,
   amount numeric(10,2) default 500,
   status text not null default 'pending' check (status in ('paid', 'pending', 'failed')),
-  method text check (method in ('online', 'pay_at_hospital')),
+  method text check (method in ('online')),
+  razorpay_order_id text,
+  razorpay_payment_id text,
   created_at timestamptz default now()
 );
 
@@ -99,6 +101,7 @@ create table if not exists public.reports (
   patient_id uuid not null references public.patients(id) on delete cascade,
   file_url text not null,
   file_name text,
+  category text default 'other',
   uploaded_by uuid references public.users(id),
   created_at timestamptz default now()
 );
@@ -172,7 +175,7 @@ create policy "Admin manage reports" on public.reports for all using (get_my_rol
 -- STORAGE BUCKET
 -- Run separately or in Supabase dashboard under Storage
 -- ============================================================
--- insert into storage.buckets (id, name, public) values ('reports', 'reports', true);
+insert into storage.buckets (id, name, public) values ('reports', 'reports', true) on conflict (id) do nothing;
 
 -- ============================================================
 -- CREATE ADMIN USER (run after creating user via Supabase Auth)
@@ -185,3 +188,14 @@ create policy "Admin manage reports" on public.reports for all using (get_my_rol
 -- ============================================================
 alter publication supabase_realtime add table public.op_records;
 alter publication supabase_realtime add table public.appointments;
+
+-- ============================================================
+-- MIGRATIONS (run if schema already exists)
+-- ============================================================
+alter table public.payments add column if not exists razorpay_order_id text;
+alter table public.payments add column if not exists razorpay_payment_id text;
+alter table public.reports add column if not exists category text default 'other';
+alter table public.payments drop constraint if exists payments_method_check;
+alter table public.payments add constraint payments_method_check check (method in ('online'));
+alter table public.appointments drop constraint if exists appointments_payment_method_check;
+alter table public.appointments add constraint appointments_payment_method_check check (payment_method in ('online'));

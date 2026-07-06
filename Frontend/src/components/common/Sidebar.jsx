@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard, Calendar, FileText, Users, Search,
-  BarChart2, Clock, Activity, LogOut, Stethoscope, CalendarOff,
+  BarChart2, Clock, Activity, LogOut, Stethoscope, CalendarOff, FolderOpen,
 } from 'lucide-react'
 import { useAuth } from '../../hooks/useAuth'
 import toast from 'react-hot-toast'
@@ -12,8 +12,11 @@ const patientNav = [
   { to: '/patient/book', icon: Calendar, label: 'Book Appointment' },
   { to: '/patient/appointments', icon: Clock, label: 'My Appointments' },
   { to: '/patient/history', icon: FileText, label: 'Medical History' },
+  { to: '/patient/reports', icon: FolderOpen, label: 'My Reports' },
   { to: '/patient/doctor', icon: Stethoscope, label: 'Know Your Doctor' },
 ]
+
+
 
 const adminNav = [
   { to: '/admin/dashboard', icon: LayoutDashboard, label: 'Dashboard' },

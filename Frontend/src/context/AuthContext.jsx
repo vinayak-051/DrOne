@@ -55,17 +55,15 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   const signUp = async ({ email, password, name, phone, age, gender }) => {
-    const { data, error } = await supabase.auth.signUp({ email, password })
-    if (error) throw error
-
-    await supabase.from('users').insert({ id: data.user.id, email, role: 'patient' })
-    await supabase.from('patients').insert({
-      user_id: data.user.id,
-      name,
-      phone,
-      age: parseInt(age),
-      gender,
+    // Profile rows are created by the on_auth_user_created DB trigger
+    // (Backend/signup_trigger.sql) — direct inserts fail under RLS when
+    // email confirmation is enabled (no session yet).
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { name, phone, age, gender } },
     })
+    if (error) throw error
     return data
   }
 

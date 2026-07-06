@@ -11,7 +11,7 @@ VALID_TIME_SLOTS = {
 class BookAppointmentRequest(BaseModel):
     date: date_type
     time_slot: str
-    payment_method: Literal["online", "pay_at_hospital"]
+    payment_method: Literal["online"]
     amount: float = 500
 
     @field_validator("date")
@@ -52,24 +52,6 @@ class AddMedicalRecordRequest(BaseModel):
     notes: Optional[str] = None
     appointment_id: Optional[str] = None
 
-
-class RescheduleRequest(BaseModel):
-    date: date_type
-    time_slot: str
-
-    @field_validator("date")
-    @classmethod
-    def date_not_past(cls, v):
-        if v < date_type.today():
-            raise ValueError("Cannot reschedule to a past date")
-        return v
-
-    @field_validator("time_slot")
-    @classmethod
-    def valid_slot(cls, v):
-        if v not in VALID_TIME_SLOTS:
-            raise ValueError(f"Invalid time slot: {v}")
-        return v
 
 
 class UpdatePatientRequest(BaseModel):

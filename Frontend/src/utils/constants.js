@@ -18,7 +18,6 @@ export const PAYMENT_STATUS = {
 
 export const PAYMENT_METHOD = {
   ONLINE: 'online',
-  PAY_AT_HOSPITAL: 'pay_at_hospital',
 }
 
 export const QUEUE_STATUS = {

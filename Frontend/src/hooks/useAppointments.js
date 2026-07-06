@@ -34,17 +34,6 @@ export const useConfirmAppointment = () => {
   })
 }
 
-export const useRescheduleAppointment = () => {
-  const qc = useQueryClient()
-  return useMutation({
-    mutationFn: ({ appointmentId, date, time_slot }) =>
-      api.patch(`/appointments/${appointmentId}/reschedule`, { date, time_slot }),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ['appointments'] })
-      qc.invalidateQueries({ queryKey: ['slots'] })
-    },
-  })
-}
 
 export const useCancelAppointment = () => {
   const qc = useQueryClient()

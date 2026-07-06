@@ -2,8 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from ..database import supabase
 from ..auth import get_user_role, require_admin
-from ..models.schemas import BookAppointmentRequest, ConfirmAppointmentRequest, RescheduleRequest
+from ..models.schemas import BookAppointmentRequest, ConfirmAppointmentRequest
 from ..logger import logger
+from postgrest.exceptions import APIError as PostgrestAPIError
 import datetime, io
 
 router = APIRouter(prefix="/appointments", tags=["appointments"])
@@ -119,13 +120,18 @@ def book_appointment(body: BookAppointmentRequest, user=Depends(get_user_role)):
     if _is_leave_day(str(body.date)):
         raise HTTPException(400, "Doctor is unavailable on this date")
     patient_id = _get_patient_id(user["id"])
-    appt_res = supabase.from_("appointments").insert({
-        "patient_id": patient_id,
-        "date": str(body.date),
-        "time_slot": body.time_slot,
-        "status": "pending",
-        "payment_method": body.payment_method,
-    }).execute()
+    try:
+        appt_res = supabase.from_("appointments").insert({
+            "patient_id": patient_id,
+            "date": str(body.date),
+            "time_slot": body.time_slot,
+            "status": "pending",
+            "payment_method": body.payment_method,
+        }).execute()
+    except PostgrestAPIError as e:
+        if e.code == "23505":
+            raise HTTPException(400, "This slot is already booked. Please choose another.")
+        raise HTTPException(500, "Booking failed, please try again")
     appt = appt_res.data[0]
     appt_id = appt["id"]
 
@@ -173,34 +179,6 @@ def get_appointment(appointment_id: str, user=Depends(get_user_role)):
             raise HTTPException(403, "Forbidden")
     return appt
 
-
-@router.patch("/{appointment_id}/reschedule")
-def reschedule_appointment(appointment_id: str, body: RescheduleRequest, user=Depends(get_user_role)):
-    appt_res = supabase.from_("appointments").select("patient_id, status") \
-        .eq("id", appointment_id).limit(1).execute()
-    if not appt_res.data:
-        raise HTTPException(404, "Appointment not found")
-    appt = appt_res.data[0]
-    if appt["status"] not in ["pending", "confirmed"]:
-        raise HTTPException(400, "Cannot reschedule a cancelled or completed appointment")
-    if user["role"] == "patient":
-        patient_id = _get_patient_id(user["id"])
-        if appt["patient_id"] != patient_id:
-            raise HTTPException(403, "Forbidden")
-    if _is_leave_day(str(body.date)):
-        raise HTTPException(400, "Doctor is unavailable on this date")
-    conflict = supabase.from_("appointments").select("id") \
-        .eq("date", str(body.date)).eq("time_slot", body.time_slot) \
-        .neq("status", "cancelled").neq("id", appointment_id) \
-        .limit(1).execute()
-    if conflict.data:
-        raise HTTPException(400, "This slot is already booked")
-    supabase.from_("appointments").update({
-        "date": str(body.date),
-        "time_slot": body.time_slot,
-    }).eq("id", appointment_id).execute()
-    logger.info("Appointment rescheduled: %s by %s", appointment_id, user["id"])
-    return {"rescheduled": True}
 
 
 @router.patch("/{appointment_id}/cancel")
