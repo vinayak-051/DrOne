@@ -183,7 +183,7 @@ export const PatientDashboard = () => {
                 color: '#ffffff',
                 textShadow: '0 0 10px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.5)',
               }}>
-                AI Health Assistant
+                AI Health
               </p>
               <p style={{
                 margin: '6px 0 0',
