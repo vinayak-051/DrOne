@@ -20,6 +20,11 @@ env/
 node_modules/
 Frontend/dist/
 
+# Capacitor
+Frontend/android/
+Frontend/ios/
+Frontend/resources/
+
 # OS
 .DS_Store
 Thumbs.db

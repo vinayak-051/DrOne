@@ -1,5 +1,6 @@
+import { useState, Suspense, lazy } from 'react'
 import { Link } from 'react-router-dom'
-import { Calendar, FileText, Clock, Plus, ArrowRight } from 'lucide-react'
+import { Calendar, FileText, Clock, Plus, ArrowRight, X } from 'lucide-react'
 import { useAuth } from '../../hooks/useAuth'
 import { useAppointments } from '../../hooks/useAppointments'
 import { Layout } from '../../components/common/Layout'
@@ -10,9 +11,12 @@ import { Button } from '../../components/common/Button'
 import { LoadingSpinner } from '../../components/common/LoadingSpinner'
 import { formatDate, formatTime } from '../../utils/helpers'
 
+const Robot3D = lazy(() => import('../../components/Robot3D').then(m => ({ default: m.Robot3D })))
+
 export const PatientDashboard = () => {
   const { patient } = useAuth()
   const { data: appointments, isLoading } = useAppointments(patient?.id)
+  const [showRobot, setShowRobot] = useState(false)
 
   const upcoming = appointments?.filter((a) => a.status !== 'cancelled' && a.status !== 'completed') || []
   const past = appointments?.filter((a) => a.status === 'completed') || []
@@ -94,6 +98,116 @@ export const PatientDashboard = () => {
           </div>
         </Card>
       </div>
+
+      {/* Floating robot button — fixed bottom-right */}
+      <button
+        onClick={() => setShowRobot(true)}
+        title="AI Assistant"
+        style={{
+          position: 'fixed',
+          bottom: '28px',
+          right: '28px',
+          width: '64px',
+          height: '64px',
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, #00d4d4, #0099bb)',
+          border: 'none',
+          cursor: 'pointer',
+          boxShadow: '0 6px 24px rgba(0,180,180,0.45)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '28px',
+          zIndex: 40,
+          transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+        }}
+        onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.1)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,180,180,0.6)' }}
+        onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 6px 24px rgba(0,180,180,0.45)' }}
+      >
+        🤖
+      </button>
+
+      {/* Robot Modal */}
+      {showRobot && (
+        <div
+          onClick={() => setShowRobot(false)}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 50,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(4px)',
+            padding: '16px',
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              position: 'relative',
+              width: 370, height: 450,
+              borderRadius: '24px',
+              overflow: 'hidden',
+              background: '#00d4d4',
+              boxShadow: '0 24px 80px rgba(0,0,0,0.25)',
+            }}
+          >
+            {/* Close */}
+            <button
+              onClick={() => setShowRobot(false)}
+              style={{
+                position: 'absolute', top: 12, right: 12, zIndex: 10,
+                width: 32, height: 32, borderRadius: '50%',
+                background: 'rgba(255,255,255,0.3)', border: 'none',
+                cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}
+            >
+              <X size={16} color="#fff" />
+            </button>
+
+            {/* 3D Robot */}
+            <div style={{ position: 'absolute', top: '10%', left: 0, right: 0 }}>
+              <Suspense fallback={
+                <div style={{ width: '100%', height: 350, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 64 }}>
+                  🤖
+                </div>
+              }>
+                <Robot3D height={385} />
+              </Suspense>
+            </div>
+
+            {/* Label */}
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, paddingBottom: 20, textAlign: 'center' }}>
+              <p style={{
+                margin: 0,
+                fontSize: 22,
+                fontWeight: 800,
+                letterSpacing: '1px',
+                color: '#ffffff',
+                textShadow: '0 0 10px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.5)',
+              }}>
+                AI Health Assistant
+              </p>
+              <p style={{
+                margin: '6px 0 0',
+                fontSize: 13,
+                fontWeight: 700,
+                letterSpacing: '3px',
+                textTransform: 'uppercase',
+                color: '#00ffff',
+                textShadow:
+                  '0 0 6px #00ffff, 0 0 12px #00ffff, 0 0 24px #00e5ff, 0 0 40px #00bcd4',
+                animation: 'neonPulse 1.8s ease-in-out infinite alternate',
+              }}>
+                Coming Soon
+              </p>
+            </div>
+            <style>{`
+              @keyframes neonPulse {
+                from { text-shadow: 0 0 4px #00ffff, 0 0 10px #00ffff, 0 0 20px #00e5ff; opacity: 0.85; }
+                to   { text-shadow: 0 0 8px #00ffff, 0 0 20px #00ffff, 0 0 40px #00e5ff, 0 0 60px #00bcd4; opacity: 1; }
+              }
+            `}</style>
+          </div>
+        </div>
+      )}
     </Layout>
   )
 }

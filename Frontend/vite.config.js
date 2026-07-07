@@ -36,6 +36,7 @@ export default defineConfig({
         ],
       },
       workbox: {
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         runtimeCaching: [
           {
@@ -61,6 +62,7 @@ export default defineConfig({
           query: ['@tanstack/react-query'],
           supabase: ['@supabase/supabase-js'],
           ui: ['lucide-react', 'react-hot-toast'],
+          three: ['three', '@react-three/fiber', '@react-three/drei'],
         },
       },
     },

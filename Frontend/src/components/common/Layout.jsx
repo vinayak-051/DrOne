@@ -33,16 +33,14 @@ export const Layout = ({ children }) => {
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Mobile Header */}
         <div className="lg:hidden flex items-center justify-between px-4 py-3 bg-white border-b border-gray-200">
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="p-2 rounded-lg hover:bg-gray-100 text-gray-600"
-          >
+          <button onClick={() => setSidebarOpen(true)} className="p-2 rounded-lg hover:bg-gray-100 text-gray-600">
             <Menu className="w-5 h-5" />
           </button>
           <div className="flex items-center gap-2">
             <img src={logo} alt="DrOne" className="w-7 h-7 object-contain" />
             <span className="font-bold text-gray-900">DrOne</span>
           </div>
+          <div className="w-9" />
         </div>
 
         <main className="flex-1 overflow-y-auto p-4 lg:p-8">

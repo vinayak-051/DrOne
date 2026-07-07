@@ -54,6 +54,7 @@ import { AnalyticsDashboard } from './pages/admin/AnalyticsDashboard'
 import { PatientsPage } from './pages/admin/PatientsPage'
 import { LeavesPage } from './pages/admin/LeavesPage'
 import { AdminProfile } from './pages/admin/AdminProfile'
+import { InfoPage } from './pages/InfoPage'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -114,8 +115,9 @@ const AppRoutes = () => {
       <Route path="/admin/analytics" element={<ProtectedRoute role="admin"><AnalyticsDashboard /></ProtectedRoute>} />
       <Route path="/admin/leaves" element={<ProtectedRoute role="admin"><LeavesPage /></ProtectedRoute>} />
       <Route path="/admin/profile" element={<ProtectedRoute role="admin"><AdminProfile /></ProtectedRoute>} />
+      <Route path="/info" element={<ProtectedRoute><InfoPage /></ProtectedRoute>} />
 
-      <Route path="/" element={<Navigate to={user ? (profile?.role === 'admin' ? '/admin/dashboard' : '/patient/dashboard') : '/login'} replace />} />
+<Route path="/" element={<Navigate to={user ? (profile?.role === 'admin' ? '/admin/dashboard' : '/patient/dashboard') : '/login'} replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
