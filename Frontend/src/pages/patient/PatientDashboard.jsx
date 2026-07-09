@@ -107,24 +107,21 @@ export const PatientDashboard = () => {
           position: 'fixed',
           bottom: '28px',
           right: '28px',
-          width: '64px',
-          height: '64px',
+          width: '68px',
+          height: '68px',
           borderRadius: '50%',
-          background: 'linear-gradient(135deg, #00d4d4, #0099bb)',
-          border: 'none',
+          background: 'linear-gradient(135deg, #e0f4ff, #b3e5fc)',
+          border: '2px solid #4fc3f7',
           cursor: 'pointer',
-          boxShadow: '0 6px 24px rgba(0,180,180,0.45)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '28px',
+          padding: '6px',
           zIndex: 40,
+          boxShadow: '0 4px 20px rgba(79,195,247,0.5)',
           transition: 'transform 0.15s ease, box-shadow 0.15s ease',
         }}
-        onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.1)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,180,180,0.6)' }}
-        onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 6px 24px rgba(0,180,180,0.45)' }}
+        onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.1)'; e.currentTarget.style.boxShadow = '0 6px 28px rgba(79,195,247,0.75)' }}
+        onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(79,195,247,0.5)' }}
       >
-        🤖
+        <img src="/icons/image.png" alt="AI Assistant" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
       </button>
 
       {/* Robot Modal */}
