@@ -1,5 +1,5 @@
 -- ============================================================
--- DOCTORIFY - Supabase PostgreSQL Schema
+-- DrOne - Supabase PostgreSQL Schema
 -- Paste this in Supabase SQL Editor → Run
 -- ============================================================
 

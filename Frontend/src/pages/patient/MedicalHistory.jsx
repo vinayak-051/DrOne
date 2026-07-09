@@ -29,7 +29,7 @@ const downloadPrescription = (rec, patientName) => {
     doc.setTextColor(255, 255, 255)
     doc.setFontSize(16)
     doc.setFont('helvetica', 'bold')
-    doc.text('DOCTORIFY HOSPITAL', w / 2, 12, { align: 'center' })
+    doc.text('DRONE HOSPITAL', w / 2, 12, { align: 'center' })
     doc.setFontSize(9)
     doc.setFont('helvetica', 'normal')
     doc.text('Prescription', w / 2, 20, { align: 'center' })
